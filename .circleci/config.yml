@@ -2,7 +2,8 @@ version: 2.1
 
 jobs:
   unit-test:
-    image: circleci/node:12
+    docker:
+      image: circleci/node:12
     environment:
       NODE_ENV: test
     steps:
@@ -14,7 +15,8 @@ jobs:
           name: Run tests
           command: CI=true npm t
   build:
-    image: circleci/node:12
+    docker:
+      image: circleci/node:12
     steps:
       - checkout
       - run:
