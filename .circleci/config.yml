@@ -31,14 +31,6 @@ workflows:
   testing:
     jobs:
       - unit-test
-    filters:
-      branches:
-        ignore:
-          - master
   build:
     jobs:
       - build-job
-    filters:
-      branches:
-        only:
-          - master
