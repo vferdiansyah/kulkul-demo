@@ -1,0 +1,39 @@
+version: 2.1
+
+jobs:
+  unit-test:
+    image: circleci/node:12
+    environment:
+      NODE_ENV: test
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm i
+      - test:
+          name: Run tests
+          command: CI=true npm t
+  build:
+    image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          name: Build source
+          command: npm run build
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+    filters:
+      branches:
+        only:
+          - develop
+  build:
+    jobs:
+      - build
+    filters:
+      branches:
+        only:
+          - master
