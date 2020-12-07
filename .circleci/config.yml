@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Install dependencies
           command: npm i
-      - test:
+      - run:
           name: Run tests
           command: CI=true npm t
   build:
@@ -18,18 +18,21 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install dependencies
+          command: npm i
+      - run:
           name: Build source
           command: npm run build
 
 workflows:
   version: 2
-  test:
+  testing:
     jobs:
-      - test
+      - unit-test
     filters:
       branches:
-        only:
-          - develop
+        ignore:
+          - master
   build:
     jobs:
       - build
